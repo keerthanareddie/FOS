@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "20"
+  name: app-ingress
+spec:
+ rules:
+  - host: hello.whale
+    http:
+      paths:
+      - backend:
+          serviceName: app-service
+          servicePort: 80
