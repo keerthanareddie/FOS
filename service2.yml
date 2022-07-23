@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms2
+spec:
+  ports:
+  - port: 80
+    targetPort: 8087
+  selector:
+    app: ms2
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo2
+spec:
+  selector:
+    matchLabels:
+      app: ms2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ms2
+    spec:
+      containers:
+      - name: ms2
+        image: docker.io/keerthana2408/kubernetes:kub
+        #rgs:
+        #- "-text=echo2"
+        ports:
+        - containerPort: 8087
