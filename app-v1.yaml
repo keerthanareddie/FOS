@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: app
+  name: app-blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: app
+      version: first
+  template:
+    metadata:
+      labels:
+        run: app
+        version: first
+    spec:
+      containers:
+      - name: app
+        image: "docker.io/keerthana2408/kubernetes:kub"
+        ports:
+        - containerPort: 8087
